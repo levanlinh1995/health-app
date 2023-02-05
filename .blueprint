@@ -1,0 +1,50 @@
+created:
+    - database/factories/MealFactory.php
+    - database/factories/MealHistoryFactory.php
+    - database/factories/BodyRecordFactory.php
+    - database/factories/ExerciseRecordFactory.php
+    - database/factories/DiaryRecordFactory.php
+    - database/factories/RecommendationFactory.php
+    - database/factories/RecommendationCategoryFactory.php
+    - database/factories/UserFactory.php
+    - database/factories/TagFactory.php
+    - database/factories/TagRecommendationFactory.php
+    - database/factories/PersonalAccessTokenFactory.php
+    - database/factories/MealTargetFactory.php
+    - database/migrations/2023_02_05_023107_create_meals_table.php
+    - database/migrations/2023_02_05_023108_create_meal_histories_table.php
+    - database/migrations/2023_02_05_023109_create_body_records_table.php
+    - database/migrations/2023_02_05_023110_create_exercise_records_table.php
+    - database/migrations/2023_02_05_023111_create_diary_records_table.php
+    - database/migrations/2023_02_05_023112_create_recommendations_table.php
+    - database/migrations/2023_02_05_023113_create_recommendation_categories_table.php
+    - database/migrations/2023_02_05_023114_create_users_table.php
+    - database/migrations/2023_02_05_023115_create_tags_table.php
+    - database/migrations/2023_02_05_023116_create_tag_recommendations_table.php
+    - database/migrations/2023_02_05_023117_create_personal_access_tokens_table.php
+    - database/migrations/2023_02_05_023118_create_meal_targets_table.php
+    - app/Models/Meal.php
+    - app/Models/MealHistory.php
+    - app/Models/BodyRecord.php
+    - app/Models/ExerciseRecord.php
+    - app/Models/DiaryRecord.php
+    - app/Models/Recommendation.php
+    - app/Models/RecommendationCategory.php
+    - app/Models/User.php
+    - app/Models/Tag.php
+    - app/Models/TagRecommendation.php
+    - app/Models/PersonalAccessToken.php
+    - app/Models/MealTarget.php
+models:
+    Meal: { id: id, name: string, status: 'tinyInteger default:1 comment:"0 - inactive; 1 - active"', created_at: timestamp, updated_at: timestamp }
+    MealHistory: { id: id, user_id: 'bigInteger unsigned foreign:users.id', meal_id: 'bigInteger unsigned foreign:meals.id', title: 'string nullable', date: 'date unique', description: 'text nullable', created_at: timestamp, updated_at: timestamp, indexes: [{ index: 'user_id, meal_id' }] }
+    BodyRecord: { id: id, user_id: 'bigInteger index unsigned foreign:users.id', date: 'date unique', weight: decimal, body_fat_percentage: decimal, description: 'text nullable', created_at: timestamp, updated_at: timestamp }
+    ExerciseRecord: { id: id, user_id: 'bigInteger index unsigned foreign:users.id', title: string, description: 'text nullable', date: date, time: time, kcal: decimal, duration: integer, created_at: timestamp, updated_at: timestamp }
+    DiaryRecord: { id: id, user_id: 'bigInteger index unsigned foreign:users.id', date: date, time: time, title: string, description: 'text nullable', created_at: timestamp, updated_at: timestamp }
+    Recommendation: { id: id, recommendation_category_id: 'bigInteger unsigned foreign:recommendation_categories.id', title: string, featured_img_path: string, content: longText, status: 'tinyInteger default:1 comment:"0 - inactive; 1 - active"', created_at: timestamp, updated_at: timestamp }
+    RecommendationCategory: { id: id, name: string, created_at: timestamp, updated_at: timestamp, status: 'tinyInteger default:1 comment:"0 - inactive; 1 - active"' }
+    User: { id: id, name: string, email: 'string unique', password: string, email_verified_at: 'timestamp nullable', remember_token: 'string nullable', created_at: timestamp, updated_at: timestamp }
+    Tag: { id: id, name: string, created_at: timestamp, updated_at: timestamp }
+    TagRecommendation: { id: id, tag_id: 'bigInteger unsigned foreign:tags.id', recommendation_id: 'bigInteger unsigned foreign:recommendations.id', indexes: [{ index: 'tag_id, recommendation_id' }] }
+    PersonalAccessToken: { id: id, tokenable_type: string, tokenable_id: 'bigInteger unsigned', name: string, token: 'string:64', abilities: 'text nullable', last_used_at: 'timestamp nullable', created_at: timestamp, updated_at: timestamp }
+    MealTarget: { id: id, user_id: 'bigInteger index unsigned foreign:users.id', date: 'date unique', target: integer, created_at: timestamp, updated_at: timestamp }
