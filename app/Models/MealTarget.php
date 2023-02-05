@@ -26,7 +26,7 @@ class MealTarget extends Model
      * @var array
      */
     protected $casts = [
-        'date' => 'date',
+        'date' => 'date:Y-m-d',
     ];
 
     public function user()

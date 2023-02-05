@@ -29,7 +29,7 @@ class MealHistoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \App\Http\Requests\StoreMealHistoryRequest $request
+     * @param \App\Http\Requests\MealHistory\StoreMealHistoryRequest $request
      * @param \App\Actions\MealHistory\StoreMealHistoryAction $action
      * @return \Illuminate\Http\JsonResponse
      */
@@ -53,7 +53,7 @@ class MealHistoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \App\Http\Requests\UpdateMealHistoryRequest $request
+     * @param \App\Http\Requests\MealHistory\UpdateMealHistoryRequest $request
      * @param int $id
      * @param \App\Actions\MealHistory\UpdateMealHistoryAction $action
      * @return \Illuminate\Http\JsonResponse
