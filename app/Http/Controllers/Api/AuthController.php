@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\JsonResponse;
 
 class AuthController extends Controller
 {
@@ -32,7 +33,7 @@ class AuthController extends Controller
                     'status' => false,
                     'message' => 'validation error',
                     'errors' => $validateUser->errors(),
-                ], 401);
+                ], JsonResponse::HTTP_UNAUTHORIZED);
             }
 
             $user = User::create([
@@ -46,12 +47,12 @@ class AuthController extends Controller
                 'message' => 'User Created Successfully',
                 'token' => $user->createToken('auth_token')->plainTextToken,
                 'token_type' => 'Bearer',
-            ], 201);
+            ], JsonResponse::HTTP_CREATED);
         } catch (\Throwable $th) {
             return response()->json([
                 'status' => false,
                 'message' => $th->getMessage(),
-            ], 500);
+            ], JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -66,7 +67,7 @@ class AuthController extends Controller
                 return response()->json([
                     'status' => false,
                     'message' => 'Invalid login details',
-                ], 401);
+                ], JsonResponse::HTTP_UNAUTHORIZED);
             }
 
             $user = User::where('email', $request->email)->first();
@@ -76,12 +77,12 @@ class AuthController extends Controller
                 'message' => 'User Logged In Successfully',
                 'token' => $user->createToken('auth_token')->plainTextToken,
                 'token_type' => 'Bearer',
-            ], 200);
+            ], JsonResponse::HTTP_OK);
         } catch (\Throwable $th) {
             return response()->json([
                 'status' => false,
                 'message' => $th->getMessage(),
-            ], 500);
+            ], JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -91,7 +92,7 @@ class AuthController extends Controller
             'status' => true,
             'message' => 'Success!',
             'data' => $request->user(),
-        ], 200);
+        ], JsonResponse::HTTP_OK);
     }
 
     public function logout()
@@ -101,6 +102,6 @@ class AuthController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'User Logged out Successfully',
-        ], 200);
+        ], JsonResponse::HTTP_OK);
     }
 }
