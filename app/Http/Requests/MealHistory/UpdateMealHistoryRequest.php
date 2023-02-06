@@ -3,6 +3,7 @@
 namespace App\Http\Requests\MealHistory;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateMealHistoryRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class UpdateMealHistoryRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,30 @@ class UpdateMealHistoryRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'user_id' => [
+                'required',
+                'numeric',
+                'exists:users,id'
+            ],
+            'meal_id' => [
+                'required',
+                'numeric',
+                'exists:meals,id'
+            ],
+            'title' => [
+                'nullable',
+                'string',
+                'max:255'
+            ],
+            'date' => [
+                'required',
+                'date_format:Y-m-d',
+                Rule::unique('meal_histories', 'date')->ignore(request()->route('meal_history'))
+            ],
+            'description' => [
+                'nullable',
+                'string'
+            ],
         ];
     }
 }

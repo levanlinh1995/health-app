@@ -17,13 +17,16 @@ class EloquentMealHistoryRepository extends EloquentBaseRepository implements Me
     public function __construct(Application $app)
     {
         parent::__construct($app);
-        
+
         $this->allowedIncludes = [
             'user',
             'meal'
         ];
 
         $this->addExtraFilters([
+            AllowedFilter::exact('id'),
+            AllowedFilter::exact('user_id'),
+            AllowedFilter::exact('meal_id'),
         ]);
     }
 }

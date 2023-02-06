@@ -22,6 +22,7 @@ class CreateMealHistoriesTable extends Migration
             $table->unsignedBigInteger('meal_id');
             $table->foreign('meal_id')->references('id')->on('meals');
             $table->string('title')->nullable();
+            $table->string('featured_img_path');
             $table->date('date')->unique();
             $table->text('description')->nullable();
             $table->index(['user_id', 'meal_id']);

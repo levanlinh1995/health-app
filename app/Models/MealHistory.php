@@ -17,6 +17,7 @@ class MealHistory extends Model
     protected $fillable = [
         'user_id',
         'meal_id',
+        'featured_img_path',
         'title',
         'date',
         'description',

@@ -29,6 +29,7 @@ class MealHistoryFactory extends Factory
             'meal_id' => Meal::factory(),
             'title' => $this->faker->sentence(4),
             'date' => $this->faker->unique()->date(),
+            'featured_img_path' => $this->faker->imageUrl(),
             'description' => $this->faker->text,
             'created_at' => $this->faker->dateTime(),
             'updated_at' => $this->faker->dateTime(),
