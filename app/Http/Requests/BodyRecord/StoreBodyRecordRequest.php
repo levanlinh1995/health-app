@@ -29,29 +29,26 @@ class StoreBodyRecordRequest extends FormRequest
                 'numeric',
                 'exists:users,id'
             ],
-            'meal_id' => [
-                'required',
-                'numeric',
-                'exists:meals,id'
-            ],
-            'title' => [
-                'nullable',
-                'string',
-                'max:255'
-            ],
             'date' => [
                 'required',
                 'date_format:Y-m-d',
-                'unique:meal_histories,date'
+                'unique:body_records,date'
             ],
             'description' => [
                 'nullable',
                 'string'
             ],
-            'featured_img_path' => [
+            'weight' => [
                 'required',
-                'string',
-                'url'
+                'numeric',
+                'min:1',
+                'max:10000'
+            ],
+            'body_fat_percentage' => [
+                'required',
+                'numeric',
+                'min:1',
+                'max:10000'
             ],
         ];
     }

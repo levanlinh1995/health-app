@@ -31,7 +31,7 @@ class ExerciseRecord extends Model
      */
     protected $casts = [
         'date' => 'date:Y-m-d',
-        'kcal' => 'decimal',
+        'time' => 'datetime:H:i',
     ];
 
     public function user()

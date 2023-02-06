@@ -12,7 +12,9 @@ class MealTargetTransformer extends Transformer
      *
      * @var string[]
      */
-    protected $relations = [];
+    protected $relations = [
+        'user' => UserTransformer::class,
+    ];
 
     /**
      * List of autoloaded default relations.

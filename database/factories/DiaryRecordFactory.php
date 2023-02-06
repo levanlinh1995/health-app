@@ -26,7 +26,7 @@ class DiaryRecordFactory extends Factory
         return [
             'user_id' => User::factory(),
             'date' => $this->faker->date(),
-            'time' => $this->faker->unique()->time(),
+            'time' => $this->faker->dateTime()->format('H:i'),
             'title' => $this->faker->sentence(4),
             'description' => $this->faker->text,
             'created_at' => $this->faker->dateTime(),

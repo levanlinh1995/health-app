@@ -28,7 +28,7 @@ class ExerciseRecordFactory extends Factory
             'title' => $this->faker->sentence(4),
             'description' => $this->faker->text,
             'date' => $this->faker->date(),
-            'time' => $this->faker->unique()->time(),
+            'time' => $this->faker->dateTime()->format('H:i'),
             'kcal' => $this->faker->randomFloat(0, 0, 55),
             'duration' => $this->faker->numberBetween(10, 60),
             'created_at' => $this->faker->dateTime(),

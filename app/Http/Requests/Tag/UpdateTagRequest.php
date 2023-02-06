@@ -25,34 +25,14 @@ class UpdateTagRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => [
-                'required',
-                'numeric',
-                'exists:users,id'
-            ],
-            'meal_id' => [
-                'required',
-                'numeric',
-                'exists:meals,id'
-            ],
-            'title' => [
-                'nullable',
-                'string',
-                'max:255'
-            ],
-            'date' => [
-                'required',
-                'date_format:Y-m-d',
-                Rule::unique('meal_histories', 'date')->ignore(request()->route('meal_history'))
-            ],
-            'description' => [
-                'nullable',
-                'string'
-            ],
-            'featured_img_path' => [
+            'name' => [
                 'required',
                 'string',
-                'url'
+                'max:255',
+                Rule::unique('tags', 'name')->ignore(request()->route('tag'))
+            ],
+            'status' => [
+                Rule::in([0, 1]),
             ],
         ];
     }

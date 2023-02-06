@@ -9,9 +9,12 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\JsonResponse;
+use App\Supports\Traits\HasTransformer;
+use App\Transformers\UserTransformer;
 
 class AuthController extends Controller
 {
+    use HasTransformer;
     /**
      * Register
      * @param Request $request
@@ -42,12 +45,10 @@ class AuthController extends Controller
                 'password' => Hash::make($request->password),
             ]);
 
-            return response()->json([
-                'status' => true,
-                'message' => 'User Created Successfully',
+            return $this->httpCreated([
                 'token' => $user->createToken('auth_token')->plainTextToken,
                 'token_type' => 'Bearer',
-            ], JsonResponse::HTTP_CREATED);
+            ]);
         } catch (\Throwable $th) {
             return response()->json([
                 'status' => false,
@@ -64,20 +65,15 @@ class AuthController extends Controller
     {
         try {
             if (!Auth::attempt($request->only(['email', 'password']))) {
-                return response()->json([
-                    'status' => false,
-                    'message' => 'Invalid login details',
-                ], JsonResponse::HTTP_UNAUTHORIZED);
+                return $this->httpUnauthorized('Invalid login details');
             }
 
             $user = User::where('email', $request->email)->first();
 
-            return response()->json([
-                'status' => true,
-                'message' => 'User Logged In Successfully',
+            return $this->httpOK([
                 'token' => $user->createToken('auth_token')->plainTextToken,
                 'token_type' => 'Bearer',
-            ], JsonResponse::HTTP_OK);
+            ]);
         } catch (\Throwable $th) {
             return response()->json([
                 'status' => false,
@@ -88,20 +84,13 @@ class AuthController extends Controller
 
     public function me(Request $request)
     {
-        return response()->json([
-            'status' => true,
-            'message' => 'Success!',
-            'data' => $request->user(),
-        ], JsonResponse::HTTP_OK);
+        $currentUser = $request->user();
+        return $this->httpOK($currentUser, UserTransformer::class);
     }
 
     public function logout()
     {
-        auth()->user()->tokens()->delete();
-
-        return response()->json([
-            'status' => true,
-            'message' => 'User Logged out Successfully',
-        ], JsonResponse::HTTP_OK);
+        auth()->user()->currentAccessToken()->delete();
+        return $this->httpNoContent();
     }
 }

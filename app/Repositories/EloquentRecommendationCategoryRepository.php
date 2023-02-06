@@ -17,11 +17,13 @@ class EloquentRecommendationCategoryRepository extends EloquentBaseRepository im
     public function __construct(Application $app)
     {
         parent::__construct($app);
-        
+
         $this->allowedIncludes = [
+            'name'
         ];
 
         $this->addExtraFilters([
+            AllowedFilter::exact('id'),
         ]);
     }
 }

@@ -12,7 +12,9 @@ class RecommendationTransformer extends Transformer
      *
      * @var string[]
      */
-    protected $relations = [];
+    protected $relations = [
+        'recommendationCategory' => RecommendationCategoryTransformer::class,
+    ];
 
     /**
      * List of autoloaded default relations.

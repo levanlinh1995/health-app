@@ -3,6 +3,7 @@
 namespace App\Http\Requests\MealTarget;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreMealTargetRequest extends FormRequest
 {
@@ -29,29 +30,16 @@ class StoreMealTargetRequest extends FormRequest
                 'numeric',
                 'exists:users,id'
             ],
-            'meal_id' => [
-                'required',
-                'numeric',
-                'exists:meals,id'
-            ],
-            'title' => [
-                'nullable',
-                'string',
-                'max:255'
-            ],
             'date' => [
                 'required',
                 'date_format:Y-m-d',
-                'unique:meal_histories,date'
+                'unique:meal_targets,date'
             ],
-            'description' => [
-                'nullable',
-                'string'
-            ],
-            'featured_img_path' => [
+            'target' => [
                 'required',
-                'string',
-                'url'
+                'integer',
+                'min:1',
+                'max:99999'
             ],
         ];
     }

@@ -17,11 +17,15 @@ class EloquentMealTargetRepository extends EloquentBaseRepository implements Mea
     public function __construct(Application $app)
     {
         parent::__construct($app);
-        
+
         $this->allowedIncludes = [
+            'user'
         ];
 
         $this->addExtraFilters([
+            AllowedFilter::exact('id'),
+            AllowedFilter::exact('user_id'),
+            AllowedFilter::exact('date'),
         ]);
     }
 }

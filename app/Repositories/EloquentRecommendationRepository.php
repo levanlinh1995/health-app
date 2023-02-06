@@ -17,11 +17,14 @@ class EloquentRecommendationRepository extends EloquentBaseRepository implements
     public function __construct(Application $app)
     {
         parent::__construct($app);
-        
+
         $this->allowedIncludes = [
+            'recommendationCategory'
         ];
 
         $this->addExtraFilters([
+            AllowedFilter::exact('id'),
+            AllowedFilter::exact('recommendation_category_id'),
         ]);
     }
 }

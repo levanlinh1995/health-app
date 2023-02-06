@@ -3,6 +3,7 @@
 namespace App\Http\Requests\RecommendationCategory;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreRecommendationCategoryRequest extends FormRequest
 {
@@ -24,34 +25,14 @@ class StoreRecommendationCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => [
-                'required',
-                'numeric',
-                'exists:users,id'
-            ],
-            'meal_id' => [
-                'required',
-                'numeric',
-                'exists:meals,id'
-            ],
-            'title' => [
-                'nullable',
-                'string',
-                'max:255'
-            ],
-            'date' => [
-                'required',
-                'date_format:Y-m-d',
-                'unique:meal_histories,date'
-            ],
-            'description' => [
-                'nullable',
-                'string'
-            ],
-            'featured_img_path' => [
+            'name' => [
                 'required',
                 'string',
-                'url'
+                'max:255',
+                'unique:recommendation_categories,name'
+            ],
+            'status' => [
+                Rule::in([0, 1]),
             ],
         ];
     }

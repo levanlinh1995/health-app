@@ -18,7 +18,7 @@ class Handler extends ExceptionHandler
 {
     use ConvertsExceptions;
     use HandleErrorException;
-    
+
     /**
      * A list of the exception types that are not reported.
      *

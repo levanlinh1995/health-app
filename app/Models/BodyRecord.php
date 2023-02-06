@@ -29,8 +29,6 @@ class BodyRecord extends Model
      */
     protected $casts = [
         'date' => 'date:Y-m-d',
-        'weight' => 'decimal',
-        'body_fat_percentage' => 'decimal',
     ];
 
     public function user()

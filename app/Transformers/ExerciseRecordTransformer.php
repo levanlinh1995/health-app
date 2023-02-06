@@ -13,6 +13,7 @@ class ExerciseRecordTransformer extends Transformer
      * @var string[]
      */
     protected $relations = [
+        'user' => UserTransformer::class,
     ];
 
     /**

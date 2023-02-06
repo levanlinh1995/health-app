@@ -29,29 +29,22 @@ class StoreDiaryRecordRequest extends FormRequest
                 'numeric',
                 'exists:users,id'
             ],
-            'meal_id' => [
-                'required',
-                'numeric',
-                'exists:meals,id'
-            ],
-            'title' => [
-                'nullable',
-                'string',
-                'max:255'
-            ],
             'date' => [
                 'required',
                 'date_format:Y-m-d',
-                'unique:meal_histories,date'
+            ],
+            'time' => [
+                'required',
+                'date_format:H:i',
+            ],
+            'title' => [
+                'required',
+                'string',
+                'max:255'
             ],
             'description' => [
                 'nullable',
                 'string'
-            ],
-            'featured_img_path' => [
-                'required',
-                'string',
-                'url'
             ],
         ];
     }
