@@ -48,6 +48,11 @@ class StoreMealHistoryRequest extends FormRequest
                 'nullable',
                 'string'
             ],
+            'featured_img_path' => [
+                'required',
+                'string',
+                'url'
+            ],
         ];
     }
 }

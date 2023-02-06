@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\MealHistoryController;
+use App\Http\Controllers\Api\BodyRecordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,4 +25,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
     // meal history
     Route::apiResource('/meal-history', MealHistoryController::class);
+
+    // meal body record
+    Route::apiResource('/body-record', BodyRecordController::class);
 });

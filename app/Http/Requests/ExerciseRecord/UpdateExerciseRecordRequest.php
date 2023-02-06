@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\MealHistory;
+namespace App\Http\Requests\ExerciseRecord;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UpdateMealHistoryRequest extends FormRequest
+class UpdateExerciseRecordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
