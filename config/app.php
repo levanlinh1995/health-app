@@ -168,6 +168,7 @@ return [
         Flugg\Responder\ResponderServiceProvider::class,
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
         App\Providers\RepositoryServiceProvider::class,
+        Elasticquent\ElasticquentServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -234,6 +235,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Responder' => Flugg\Responder\Facades\Responder::class,
         'Transformation' => Flugg\Responder\Facades\Transformation::class,
+        'Es' => Elasticquent\ElasticquentElasticsearchFacade::class,
 
     ],
 
